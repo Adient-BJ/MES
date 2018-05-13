@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F5D437C5-6002-406F-BE7F-1C85729EB954}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CheckEnd</RootNamespace>
+    <AssemblyName>CheckEnd</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.OPCAutomation, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>LIB\Interop.OPCAutomation.dll</HintPath>
+    </Reference>
+    <Reference Include="IrisSkin4, Version=2006.3.22.45, Culture=neutral, PublicKeyToken=127be25a6db25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\IrisSkin4.dll</HintPath>
+    </Reference>
+    <Reference Include="libzkfpcsharp, Version=1.0.0.1, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\libzkfpcsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bll\Base.cs" />
+    <Compile Include="Bll\T_AnswerPic.cs" />
+    <Compile Include="Bll\T_MJCarInfo.cs" />
+    <Compile Include="Bll\T_OPCTag.cs" />
+    <Compile Include="Bll\T_User.cs" />
+    <Compile Include="Bll\T_WorkbayFuntionTag.cs" />
+    <Compile Include="Bll\T_WorkbayIPConfig.cs" />
+    <Compile Include="Bll\T_ZJCarInfo.cs" />
+    <Compile Include="Bll\T_ZJInfo.cs" />
+    <Compile Include="Bll\T_ZJResult.cs" />
+    <Compile Include="Frms\BackDownFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\BackDownFrm.Designer.cs">
+      <DependentUpon>BackDownFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\BackRepairFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\BackRepairFrm.Designer.cs">
+      <DependentUpon>BackRepairFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bll\T_CheckResult.cs" />
+    <Compile Include="Command\GlobalDel.cs" />
+    <Compile Include="Command\GlobalPath.cs" />
+    <Compile Include="Frms\ConfirmFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\ConfirmFrm.Designer.cs">
+      <DependentUpon>ConfirmFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\EndCheckFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\EndCheckFrm.Designer.cs">
+      <DependentUpon>EndCheckFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\mangjianConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\mangjianConfirm.Designer.cs">
+      <DependentUpon>mangjianConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\PwdLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\PwdLogin.Designer.cs">
+      <DependentUpon>PwdLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\Test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\Test.Designer.cs">
+      <DependentUpon>Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\终检.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\终检.Designer.cs">
+      <DependentUpon>终检.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CheckResult.cs" />
+    <Compile Include="Model\T_WorkbayFuntionTag.cs" />
+    <Compile Include="Model\T_WorkbayIPConfig.cs" />
+    <Compile Include="MyControl\AnswerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\AnswerControl.Designer.cs">
+      <DependentUpon>AnswerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bll\BitmapFormat.cs" />
+    <Compile Include="Bll\T_MJAnswer.cs" />
+    <Compile Include="Bll\T_Bypass.cs" />
+    <Compile Include="Bll\T_ErrorMes.cs" />
+    <Compile Include="Bll\T_Staff.cs" />
+    <Compile Include="Bll\T_ZhiWen.cs" />
+    <Compile Include="Bll\User.cs" />
+    <Compile Include="MyControl\BigPicControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyControl\BigPicControl.Designer.cs">
+      <DependentUpon>BigPicControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\bigPicListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\bigPicListControl.Designer.cs">
+      <DependentUpon>bigPicListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\ByPassErrorInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\ByPassErrorInfo.Designer.cs">
+      <DependentUpon>ByPassErrorInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DBUtility\ErrorLog.cs" />
+    <Compile Include="DBUtility\SqlHelper.cs" />
+    <Compile Include="MyControl\CanRepairListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\CanRepairListControl.Designer.cs">
+      <DependentUpon>CanRepairListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\ZJOption.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\ZJOption.Designer.cs">
+      <DependentUpon>ZJOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\OptionInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\OptionInfo.Designer.cs">
+      <DependentUpon>OptionInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\RepairOrderInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\RepairOrderInfo.Designer.cs">
+      <DependentUpon>RepairOrderInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControl\TestResult.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControl\TestResult.Designer.cs">
+      <DependentUpon>TestResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\RepairFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\RepairFrm.Designer.cs">
+      <DependentUpon>RepairFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XML\XmlConfig.cs" />
+    <Compile Include="Frms\Frm_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\Frm_Login.Designer.cs">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frms\MangJianFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frms\MangJianFrm.Designer.cs">
+      <DependentUpon>MangJianFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\T_Staff.cs" />
+    <Compile Include="Model\T_ZhiWen.cs" />
+    <Compile Include="Model\UserAnswerQuestions.cs" />
+    <Compile Include="Model\V_StaffZhiWen.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Frms\BackDownFrm.resx">
+      <DependentUpon>BackDownFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\BackRepairFrm.resx">
+      <DependentUpon>BackRepairFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\ConfirmFrm.resx">
+      <DependentUpon>ConfirmFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\EndCheckFrm.resx">
+      <DependentUpon>EndCheckFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\mangjianConfirm.resx">
+      <DependentUpon>mangjianConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\PwdLogin.resx">
+      <DependentUpon>PwdLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\Test.resx">
+      <DependentUpon>Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\终检.resx">
+      <DependentUpon>终检.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\AnswerControl.resx">
+      <DependentUpon>AnswerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\BigPicControl.resx">
+      <DependentUpon>BigPicControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\bigPicListControl.resx">
+      <DependentUpon>bigPicListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\ByPassErrorInfo.resx">
+      <DependentUpon>ByPassErrorInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\CanRepairListControl.resx">
+      <DependentUpon>CanRepairListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\ZJOption.resx">
+      <DependentUpon>ZJOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\OptionInfo.resx">
+      <DependentUpon>OptionInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\RepairOrderInfo.resx">
+      <DependentUpon>RepairOrderInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControl\TestResult.resx">
+      <DependentUpon>TestResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\RepairFrm.resx">
+      <DependentUpon>RepairFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\Frm_Login.resx">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frms\MangJianFrm.resx">
+      <DependentUpon>MangJianFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LIB\MacOS.ssk" />
+    <None Include="MacOS.ssk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IrisSkin4.dll" />
+    <Content Include="libzkfpcsharp.dll" />
+    <Content Include="LIB\Interop.OPCAutomation.dll" />
+    <Content Include="IP.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Resources\zw.PNG" />
+    <None Include="Resources\Delete.png" />
+    <Content Include="LIB\IrisSkin4.dll" />
+    <Content Include="LIB\libzkfpcsharp.dll" />
+    <Content Include="LIB\OPCDAAuto.dll" />
+    <Content Include="Resources\errorImg.png" />
+    <None Include="Resources\提交3.png" />
+    <None Include="Resources\提交2.png" />
+    <None Include="Resources\提交1.png" />
+    <None Include="Resources\确认3.png" />
+    <None Include="Resources\确认2.png" />
+    <None Include="Resources\确认1 .png" />
+    <None Include="Resources\修%28正常%29.png" />
+    <None Include="Resources\修%28选中%29.png" />
+    <None Include="Resources\修%28按下%29.png" />
+    <None Include="Resources\拆%28正常%29.png" />
+    <None Include="Resources\拆%28选中%29.png" />
+    <None Include="Resources\拆%28按下%29.png" />
+    <None Include="Resources\选中.png" />
+    <None Include="Resources\按下.png" />
+    <None Include="Resources\正常.png" />
+    <None Include="Resources\rightImg.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

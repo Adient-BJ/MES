@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7DCB9FF-E477-4C0F-B5E7-3A5EB10A44C7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Picking</RootNamespace>
+    <AssemblyName>Picking</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DataMatrix.net">
+      <HintPath>LIB\DataMatrix.net.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.OPCAutomation, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\Picking\Picking\LIB\Interop.OPCAutomation.dll</HintPath>
+    </Reference>
+    <Reference Include="libzkfpcsharp, Version=1.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LIB\libzkfpcsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=10.0.4504.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>LIB\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\BitmapFormat.cs" />
+    <Compile Include="BLL\GetPickData.cs" />
+    <Compile Include="BLL\PrintFZOrder.cs" />
+    <Compile Include="BLL\T_EOL.cs" />
+    <Compile Include="BLL\T_FZOrder.cs" />
+    <Compile Include="BLL\T_FZOrderConfirm.cs" />
+    <Compile Include="BLL\T_KuWei.cs" />
+    <Compile Include="BLL\T_PickCall.cs" />
+    <Compile Include="BLL\T_PickOrder.cs" />
+    <Compile Include="BLL\T_JISA.cs" />
+    <Compile Include="BLL\T_PickConfig.cs" />
+    <Compile Include="BLL\T_ReSetMJZJ.cs" />
+    <Compile Include="BLL\T_SearchFaYun.cs" />
+    <Compile Include="BLL\T_Staff.cs" />
+    <Compile Include="BLL\T_User.cs" />
+    <Compile Include="BLL\T_Verifying.cs" />
+    <Compile Include="BLL\T_ZhiWen.cs" />
+    <Compile Include="BLL\User.cs" />
+    <Compile Include="Control\EntruckControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\EntruckControl.Designer.cs">
+      <DependentUpon>EntruckControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\FZPrintControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\FZPrintControl.Designer.cs">
+      <DependentUpon>FZPrintControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PickingQueue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\PickingQueue.Designer.cs">
+      <DependentUpon>PickingQueue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PickOrderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\PickOrderControl.Designer.cs">
+      <DependentUpon>PickOrderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ShipControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ShipControl.Designer.cs">
+      <DependentUpon>ShipControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\ErrorLog.cs" />
+    <Compile Include="DB\SqlHelper.cs" />
+    <Compile Include="Frm\ConfirmFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\ConfirmFrm.Designer.cs">
+      <DependentUpon>ConfirmFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\EachEntruck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\EachEntruck.Designer.cs">
+      <DependentUpon>EachEntruck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\AllEntruck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\AllEntruck.Designer.cs">
+      <DependentUpon>AllEntruck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\EmptyArea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\EmptyArea.Designer.cs">
+      <DependentUpon>EmptyArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\Forwarding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\Forwarding.Designer.cs">
+      <DependentUpon>Forwarding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\HZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\HZ.Designer.cs">
+      <DependentUpon>HZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\ImportKuWei.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\ImportKuWei.Designer.cs">
+      <DependentUpon>ImportKuWei.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\InitialKuWei.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\InitialKuWei.Designer.cs">
+      <DependentUpon>InitialKuWei.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\Picking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\Picking.Designer.cs">
+      <DependentUpon>Picking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\PrintHZOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\PrintHZOrder.Designer.cs">
+      <DependentUpon>PrintHZOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\ResetMJZJ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\ResetMJZJ.Designer.cs">
+      <DependentUpon>ResetMJZJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\SearchFayun.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\SearchFayun.Designer.cs">
+      <DependentUpon>SearchFayun.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\SearchKuWei.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\SearchKuWei.Designer.cs">
+      <DependentUpon>SearchKuWei.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\ShippingConfirmFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\ShippingConfirmFrm.Designer.cs">
+      <DependentUpon>ShippingConfirmFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\Stock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\Stock.Designer.cs">
+      <DependentUpon>Stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm\UserLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\UserLogin.Designer.cs">
+      <DependentUpon>UserLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EntruckModel.cs" />
+    <Compile Include="Model\FZOrderModel.cs" />
+    <Compile Include="Model\T_ZhiWen.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="PrintHzOrders.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimingPrintOrder.cs" />
+    <Compile Include="Utility\PrintHZ.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XML\XmlConfig.cs" />
+    <EmbeddedResource Include="Control\EntruckControl.resx">
+      <DependentUpon>EntruckControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\FZPrintControl.resx">
+      <DependentUpon>FZPrintControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PickingQueue.resx">
+      <DependentUpon>PickingQueue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PickOrderControl.resx">
+      <DependentUpon>PickOrderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ShipControl.resx">
+      <DependentUpon>ShipControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\ConfirmFrm.resx">
+      <DependentUpon>ConfirmFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\EachEntruck.resx">
+      <DependentUpon>EachEntruck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\AllEntruck.resx">
+      <DependentUpon>AllEntruck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\EmptyArea.resx">
+      <DependentUpon>EmptyArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\Forwarding.resx">
+      <DependentUpon>Forwarding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\HZ.resx">
+      <DependentUpon>HZ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\ImportKuWei.resx">
+      <DependentUpon>ImportKuWei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\InitialKuWei.resx">
+      <DependentUpon>InitialKuWei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\Picking.resx">
+      <DependentUpon>Picking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\PrintHZOrder.resx">
+      <DependentUpon>PrintHZOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\ResetMJZJ.resx">
+      <DependentUpon>ResetMJZJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\SearchFayun.resx">
+      <DependentUpon>SearchFayun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\SearchKuWei.resx">
+      <DependentUpon>SearchKuWei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\ShippingConfirmFrm.resx">
+      <DependentUpon>ShippingConfirmFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\Stock.resx">
+      <DependentUpon>Stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\UserLogin.resx">
+      <DependentUpon>UserLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Image\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LIB\Interop.OPCAutomation.dll" />
+    <Content Include="LIB\libzkfpcsharp.dll" />
+    <Content Include="LIB\Microsoft.Office.Interop.Excel.dll" />
+    <None Include="Resources\zw.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="OPCAutomation">
+      <Guid>{28E68F91-8D75-11D1-8DC3-3C302A000000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

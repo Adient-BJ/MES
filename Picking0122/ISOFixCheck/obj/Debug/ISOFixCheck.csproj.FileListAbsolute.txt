@@ -1,0 +1,10 @@
+D:\MES_Code\Picking0122\ISOFixCheck\bin\Debug\ISOFixCheck.exe.config
+D:\MES_Code\Picking0122\ISOFixCheck\bin\Debug\ISOFixCheck.exe
+D:\MES_Code\Picking0122\ISOFixCheck\bin\Debug\ISOFixCheck.pdb
+D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csprojResolveAssemblyReference.cache
+D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.ISOFixChk.resources
+D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.Properties.Resources.resources
+D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csproj.GenerateResource.Cache
+D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csproj.CoreCompileInputs.cache
+D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.exe
+D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.pdb
