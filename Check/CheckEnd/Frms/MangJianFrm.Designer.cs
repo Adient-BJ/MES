@@ -45,6 +45,8 @@
             this.mes = new System.Windows.Forms.Panel();
             this.mesInfo = new System.Windows.Forms.Label();
             this.pass = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.mes.SuspendLayout();
             this.SuspendLayout();
@@ -161,7 +163,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(32, 175);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1010, 273);
+            this.panel2.Size = new System.Drawing.Size(568, 273);
             this.panel2.TabIndex = 7;
             // 
             // bypass
@@ -226,11 +228,30 @@
             this.pass.UseVisualStyleBackColor = true;
             this.pass.Click += new System.EventHandler(this.pass_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(617, 221);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(374, 224);
+            this.flowLayoutPanel1.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(623, 175);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 43);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "扭矩信息";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MangJianFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 626);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pass);
             this.Controls.Add(this.mes);
@@ -270,5 +291,7 @@
         private System.Windows.Forms.Label workBay;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label barCode;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label5;
     }
 }
