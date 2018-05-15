@@ -64,6 +64,7 @@
     <Compile Include="Bll\T_AnswerPic.cs" />
     <Compile Include="Bll\T_MJCarInfo.cs" />
     <Compile Include="Bll\T_OPCTag.cs" />
+    <Compile Include="Bll\T_Robot_PFRecord.cs" />
     <Compile Include="Bll\T_User.cs" />
     <Compile Include="Bll\T_WorkbayFuntionTag.cs" />
     <Compile Include="Bll\T_WorkbayIPConfig.cs" />

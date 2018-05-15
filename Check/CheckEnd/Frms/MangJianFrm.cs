@@ -21,7 +21,7 @@ namespace CheckEnd
 
         public string BarCode { get; set; }
         public string WorkOpcTag { get; set; }
-
+        public string ProductNum;
         public string WorkBayName { get; set; }
 
         public string Code { get; set; }
@@ -46,6 +46,8 @@ namespace CheckEnd
         private void MangJianFrm_Load(object sender, EventArgs e)
         {
             Frm_Initialize();
+            //loadGunRslt();
+
             this.barCode.Text = "";
             ShowErrorMessageInfo("请等待托盘到位");
             OPC_Ini();
@@ -92,10 +94,16 @@ namespace CheckEnd
             int p1h = this.panel1.Height;
             this.panel1.Location = new Point(0, p1h);
 
-            this.panel2.Width = p1w - Convert.ToInt32(width * 0.06);
+            this.panel2.Width = Convert.ToInt32(p1w*0.8) - Convert.ToInt32(width * 0.06);
             this.panel2.Height = (height / 2) / 5 * 4;
             this.panel2.Location = new Point(Convert.ToInt32(width * 0.03), Convert.ToInt32(p1h * 2.5));
             this.panel2.BorderStyle = BorderStyle.FixedSingle;
+
+            this.flowLayoutPanel1.Width = width - panel2.Width - Convert.ToInt32(width * 0.06);
+            this.flowLayoutPanel1.Height = panel2.Height;
+            this.flowLayoutPanel1.Location = new Point(panel2.Right+ Convert.ToInt32(width * 0.01), Convert.ToInt32(p1h * 2.5));
+
+            this.label5.Location = new Point(panel2.Right + Convert.ToInt32(width * 0.01), Convert.ToInt32(p1h * 2.5)-label5.Height);
 
             this.mes.Size = new Size();
 
@@ -520,6 +528,10 @@ namespace CheckEnd
 
         #endregion
 
+        string[] GunListRobot = new string[5] {"101","201","301","401","501" };
+        string[] GunlistFB = new string[2] { "1", "2" };
+        Dictionary<string, Label> DicRobot = new Dictionary<string, Label>();
+        Dictionary<string, Label> DicFB = new Dictionary<string, Label>();
 
 
         #region 扫描条形码
@@ -544,12 +556,22 @@ namespace CheckEnd
                     {
                         this.carModelName.Text = dt.Rows[0]["CarModelName"].ToString();
                         this.carType.Text = dt.Rows[0]["CarType"].ToString();
+                        ProductNum = dt.Rows[0]["ProductionNumber"].ToString();
                     }
                     else
                     {
                         this.carModelName.Text = "无数据";
                         this.carType.Text = "无数据";
                     }
+
+                    if (loadGunRslt(BarCode))
+                    {
+                        MessageBox.Show("大枪扭矩值有不合格记录");
+                        BarCode = "";
+                        ProductNum = "";
+                        return;
+                    }
+
 
                     this.bypass.Text = "请回答下列问题：";
                     AnswerQuestions();
@@ -568,6 +590,93 @@ namespace CheckEnd
                 this.pass.Show();
                 this.submit.Show();
             }
+        }
+
+        private bool loadGunRslt(string barcode)
+        {
+            Dictionary<string, Label> btnBagRobot = new Dictionary<string, Label>();
+            Dictionary<string, Label> btnBagFB = new Dictionary<string, Label>();
+            foreach (var item in GunListRobot)
+            {
+                string objectName = "R" + item;
+                btnBagRobot[objectName] = new Label();
+                btnBagRobot[objectName].Text = objectName.Substring(0, 2);
+                btnBagRobot[objectName].AutoSize = false;
+                btnBagRobot[objectName].BorderStyle = BorderStyle.FixedSingle;
+                btnBagRobot[objectName].Size = new Size(Convert.ToInt32(flowLayoutPanel1.Width / 2 - 1), flowLayoutPanel1.Height / 4);
+                btnBagRobot[objectName].Margin = new Padding(0, 0, 0, 0);
+                btnBagRobot[objectName].Font = new Font("微软雅黑", 22, FontStyle.Bold);
+                DicRobot.Add(item, btnBagRobot[objectName]);
+                flowLayoutPanel1.Controls.Add(btnBagRobot[objectName]);
+            }
+
+            foreach (var item in GunlistFB)
+            {
+                string objName = "FB" + item;
+                btnBagFB[objName] = new Label();
+                if (ProductNum.Substring(0, 1) == "A")
+                {
+                    btnBagFB[objName].Text = "FLB3-" + item;
+
+                }
+                else if (ProductNum.Substring(0, 1) == "E")
+                {
+                    btnBagFB[objName].Text = "FRB3-" + item;
+
+                }
+
+                btnBagFB[objName].AutoSize = false;
+                btnBagFB[objName].BorderStyle = BorderStyle.FixedSingle;
+                btnBagFB[objName].Size = new Size(Convert.ToInt32(flowLayoutPanel1.Width / 2 - 1), flowLayoutPanel1.Height / 4);
+                btnBagFB[objName].Margin = new Padding(0, 0, 0, 0);
+                btnBagFB[objName].Font = new Font("微软雅黑", 22, FontStyle.Bold);
+                DicFB.Add(item, btnBagFB[objName]);
+                flowLayoutPanel1.Controls.Add(btnBagFB[objName]);
+
+            }
+            T_Robot_PFRecord robotPF = new T_Robot_PFRecord();
+            DataTable dt = robotPF.GetPFResult(BarCode);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if (GunListRobot.Contains(dt.Rows[i]["IsOK"].ToString()))
+                {
+                    DicRobot[dt.Rows[i]["IsOK"].ToString()].BackColor = Color.Green;
+                }
+            }
+            DataTable dtFB = robotPF.GetFBResult(barcode, ProductNum);
+            for (int i = 0; i < dtFB.Rows.Count; i++)
+            {
+                if (GunlistFB.Contains(dtFB.Rows[i]["PFIndex"].ToString()))
+                {
+                    DicFB[dtFB.Rows[i]["PFIndex"].ToString()].BackColor = Color.Green;
+                }
+            }
+
+            //foreach (var item in DicRobot)
+            //{
+            //    if (item.Value.BackColor!=Color.Green)
+            //    {
+            //        return false;
+            //    }
+            //}
+            //foreach (var item in DicFB)
+            //{
+            //    if (item.Value.BackColor != Color.Green)
+            //    {
+            //        return false;
+            //    }
+
+            //}
+            foreach (Label item in flowLayoutPanel1.Controls)
+            {
+                if (item.BackColor!=Color.Green)
+                {
+                    return false;
+                }
+            }
+                           
+            return true;
+
         }
 
         private void MangJianFrm_Activated(object sender, EventArgs e)
