@@ -275,12 +275,23 @@ namespace CheckEnd
                                 {
                                     this.carModelName.Text = dt.Rows[0]["CarModelName"].ToString();
                                     this.carType.Text = dt.Rows[0]["CarType"].ToString();
+                                    ProductNum = dt.Rows[0]["ProductionNumber"].ToString();
+
                                 }
                                 else
                                 {
                                     this.carModelName.Text = "无数据";
                                     this.carType.Text = "无数据";
                                 }
+
+                                if (!loadGunRslt(BarCode))
+                                {
+                                    MessageBox.Show("大枪扭矩值有不合格记录");
+                                    BarCode = "";
+                                    ProductNum = "";
+                                    return;
+                                }
+
                                 this.submit.Show();
                                 this.pass.Show();
                                 this.bypass.Text = "请回答下列问题：";
@@ -289,6 +300,9 @@ namespace CheckEnd
                                     Model.UserAnswerQuestions.UserAnswer.Clear();
                                 }
                                 AnswerQuestions();
+                                BarCode = "";
+                                ProductNum = "";
+
                             }
                             else
                             {
@@ -548,6 +562,7 @@ namespace CheckEnd
                 BarCode += e.KeyChar.ToString().Replace("\r", "");
                 if (e.KeyChar == 13)
                 {
+                    //BarCode = "AXABA4000000003115179P1805170037";
                     this.barCode.Text = BarCode;
                     Model.UserAnswerQuestions.BarCode = barCode.Text;
                     Bll.T_MJCarInfo carType = new Bll.T_MJCarInfo();
@@ -564,7 +579,7 @@ namespace CheckEnd
                         this.carType.Text = "无数据";
                     }
 
-                    if (loadGunRslt(BarCode))
+                    if (!loadGunRslt(BarCode))
                     {
                         MessageBox.Show("大枪扭矩值有不合格记录");
                         BarCode = "";
@@ -577,7 +592,7 @@ namespace CheckEnd
                     AnswerQuestions();
                     this.pass.Show();
                     this.submit.Show();
-
+                    ProductNum = "";
                     BarCode = "";
                     //Model.UserAnswerQuestions.BarCode = "";
                 }
@@ -592,7 +607,7 @@ namespace CheckEnd
             }
         }
 
-        private bool loadGunRslt(string barcode)
+        private bool loadGunRslt(string barcodeS)
         {
             Dictionary<string, Label> btnBagRobot = new Dictionary<string, Label>();
             Dictionary<string, Label> btnBagFB = new Dictionary<string, Label>();
@@ -609,17 +624,17 @@ namespace CheckEnd
                 DicRobot.Add(item, btnBagRobot[objectName]);
                 flowLayoutPanel1.Controls.Add(btnBagRobot[objectName]);
             }
-
+            
             foreach (var item in GunlistFB)
             {
                 string objName = "FB" + item;
                 btnBagFB[objName] = new Label();
-                if (ProductNum.Substring(0, 1) == "A")
+                if (barcodeS.Substring(0, 1) == "A")
                 {
                     btnBagFB[objName].Text = "FLB3-" + item;
 
                 }
-                else if (ProductNum.Substring(0, 1) == "E")
+                else if (barcodeS.Substring(0, 1) == "E")
                 {
                     btnBagFB[objName].Text = "FRB3-" + item;
 
@@ -643,7 +658,7 @@ namespace CheckEnd
                     DicRobot[dt.Rows[i]["IsOK"].ToString()].BackColor = Color.Green;
                 }
             }
-            DataTable dtFB = robotPF.GetFBResult(barcode, ProductNum);
+            DataTable dtFB = robotPF.GetFBResult(barcodeS, ProductNum);
             for (int i = 0; i < dtFB.Rows.Count; i++)
             {
                 if (GunlistFB.Contains(dtFB.Rows[i]["PFIndex"].ToString()))
@@ -732,6 +747,12 @@ namespace CheckEnd
                         SendRelease();
                         ShowErrorMessageInfo("盲检合格，请放行");
                         this.panel2.Controls.Clear();
+                        this.flowLayoutPanel1.Controls.Clear();
+                        DicFB.Clear();
+                        DicRobot.Clear();
+                        barCode.Text = "";
+                        carModelName.Text = "";
+                        carType.Text = "";
                         this.pass.Hide();
                         this.submit.Hide();
                     }
@@ -746,6 +767,13 @@ namespace CheckEnd
                                 SendRelease();
                                 ShowErrorMessageInfo("盲检合格，请放行");
                                 this.panel2.Controls.Clear();
+                                this.flowLayoutPanel1.Controls.Clear();
+                                DicFB.Clear();
+                                DicRobot.Clear();
+                                barCode.Text = "";
+                                carModelName.Text = "";
+                                carType.Text = "";
+
                                 this.pass.Hide();
                                 this.submit.Hide();
                             }

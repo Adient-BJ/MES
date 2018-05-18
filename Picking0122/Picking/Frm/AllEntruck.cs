@@ -316,8 +316,17 @@ namespace Picking.Frm
 
             EntruckControl e3 = new EntruckControl();
             int mj3 = t_Verifying.GetMJResult(MasterBarCodeC);
-            e3.Is40Or60 = true;
-            e3.IsZ177B = false; ;
+            if (CarType == "X156")
+            {
+                e3.Is40Or60 = true;
+                e3.IsZ177B = false; ;
+            }
+            else if (CarType == "Z177")
+            {
+                e3.Is40Or60 = false;
+                e3.IsZ177B = true; ;
+
+            }
             e3.TrueCode = MasterBarCodeC;
             e3.ThisCode = "";
             e3.MJR = mj3 == 1 ? true : false;
@@ -365,8 +374,8 @@ namespace Picking.Frm
             {
                 EntruckControl e4 = new EntruckControl();
                 int m4 = t_Verifying.GetMJResult(MasterBarCodeB);
-                e4.Is40Or60 = false;
-                e4.IsZ177B = true;
+                e4.Is40Or60 = true;
+                e4.IsZ177B = false;
                 e4.TrueCode = MasterBarCodeB;
                 e4.ThisCode = "";
                 e4.MJR = m4 == 1 ? true : false;

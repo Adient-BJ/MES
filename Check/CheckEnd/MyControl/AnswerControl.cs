@@ -42,20 +42,20 @@ namespace CheckEnd
             this.question.Size = new Size(width / 3, height / 7);
             this.question.Text = Questions;
 
-            this.answer.Location = new Point((question.Width + width / 4), 0);
-            this.answer.Size = new Size(width / 10, height / 7);
+            this.answer.Location = new Point((question.Width + width / 6), 0);
+            this.answer.Size = new Size(width / 8, height / 7);
             this.answer.Text = Answers;
 
             this.answer2.Location = new Point((answer.Right), 0);
-            this.answer2.Size = new Size(width / 10, height / 7);
+            this.answer2.Size = new Size(width / 8, height / 7);
             this.answer2.Text = Answers2;
 
             this.answer3.Location = new Point((answer2.Right), 0);
-            this.answer3.Size = new Size(width / 10, height / 7);
+            this.answer3.Size = new Size(width / 8, height / 7);
             this.answer3.Text = Answers3;
 
             this.answer4.Location = new Point((answer3.Right), 0);
-            this.answer4.Size = new Size(width / 10, height / 7);
+            this.answer4.Size = new Size(width / 8, height / 7);
             this.answer4.Text = Answers4;
 
 
