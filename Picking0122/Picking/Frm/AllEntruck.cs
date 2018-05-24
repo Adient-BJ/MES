@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -260,6 +261,15 @@ namespace Picking.Frm
 
         public void LoadList(string shengchanhao)
         {
+            StreamReader sr = new StreamReader("D:\\Clist.txt", Encoding.Default);
+            String line;
+            List<string> Clist = new List<string>();
+            while ((line = sr.ReadLine()) != null)
+            {
+                Clist.Add(line.ToString());
+            }
+
+
             BLL.T_Verifying t_Verifying = new BLL.T_Verifying();
             BLL.T_EOL t_EOL = new BLL.T_EOL();
             DataTable dt = t_Verifying.GetHZOrder(shengchanhao);
@@ -316,29 +326,37 @@ namespace Picking.Frm
 
             EntruckControl e3 = new EntruckControl();
             int mj3 = t_Verifying.GetMJResult(MasterBarCodeC);
-            if (CarType == "X156")
+            if (CarType == "X156" )
             {
                 e3.Is40Or60 = true;
                 e3.IsZ177B = false; ;
             }
-            else if (CarType == "Z177")
+            else if (CarType == "Z177" )
             {
-                e3.Is40Or60 = false;
-                e3.IsZ177B = true; ;
+                if (Clist.Contains(MasterBarCodeC.Substring(0, 6)))
+                {
+                    e3.Is40Or60 = true;
+                    e3.IsZ177B = false; ;
+                }
+                else
+                {
+                    e3.Is40Or60 = false;
+                    e3.IsZ177B = true;
+                }
 
             }
             e3.TrueCode = MasterBarCodeC;
             e3.ThisCode = "";
             e3.MJR = mj3 == 1 ? true : false;
             e3.ZJR = t_Verifying.GetZJResult(MasterBarCodeC);
-            e3.DJR = t_EOL.GetEOLResult(MasterBarCodeC);
+            e3.DJR = t_EOL.GetRearEOLResult(MasterBarCodeC);
             e3.SetInfo(this.scanDes.Width, this.scanDes.Height, "请扫码整垫");
             e3.Location = new Point(0, locationY);
             this.scanDes.Controls.Add(e3);
             locationY += e3.Height;
             DicEn.Add(整垫, e3);
 
-            if (CarType == "X156")
+            if (CarType == "X156" )
             {
                 EntruckControl e4 = new EntruckControl();
                 int m4 = t_Verifying.GetMJResult(MasterBarCode40);

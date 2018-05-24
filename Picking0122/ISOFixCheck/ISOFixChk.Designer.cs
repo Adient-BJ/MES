@@ -160,7 +160,9 @@
             this.Name = "ISOFixChk";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.ISOFixChk_Activated);
             this.Load += new System.EventHandler(this.ISOFixChk_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ISOFixChk_KeyPress);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

@@ -8,3 +8,13 @@ D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csproj.GenerateResourc
 D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csproj.CoreCompileInputs.cache
 D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.exe
 D:\MES_Code\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.pdb
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\bin\Debug\ISOFixCheck.exe.config
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\bin\Debug\ISOFixCheck.exe
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\bin\Debug\ISOFixCheck.pdb
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csprojAssemblyReference.cache
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.ISOFixChk.resources
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.Properties.Resources.resources
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csproj.GenerateResource.cache
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csproj.CoreCompileInputs.cache
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.exe
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.pdb
