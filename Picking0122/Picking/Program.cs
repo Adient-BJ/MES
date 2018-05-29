@@ -16,7 +16,7 @@ namespace Picking
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AllEntruck());
+            Application.Run(new PrintHZOrder());
         }
     }
 }

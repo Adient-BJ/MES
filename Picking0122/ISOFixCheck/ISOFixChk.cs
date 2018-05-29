@@ -14,6 +14,8 @@ namespace ISOFixCheck
     public partial class ISOFixChk : Form
     {
         string barCode = "";
+        DataTable isoData;
+        DataTable alcCode;
 
         public ISOFixChk()
         {
@@ -95,7 +97,6 @@ namespace ISOFixCheck
             pictureBox1.Location = new Point(panel2.Width, p_top.Height);
             pictureBox1.Size = new Size(width - panel2.Width, panel2.Height);
             pictureBox1.BackColor = Color.Black;
-            pictureBox1.Image = Image.FromFile(@"d:\a.jpg");
 
             //this.scanTitle.Size = new Size(Convert.ToInt32(this.Width * 0.268), Convert.ToInt32(this.Height * 0.07));
             //this.scanTitle.Location = new Point(Convert.ToInt32(this.Width * 0.15), Convert.ToInt32(this.Height * 0.1));
@@ -128,8 +129,8 @@ namespace ISOFixCheck
         private void ISOFixChk_Load(object sender, EventArgs e)
         {
             Frm_Initialize();
-            DataTable dt = GetISOData();
-            label2.Text = dt.Rows[0]["总成号"].ToString();
+            isoData = GetISOData();
+            alcCode = GetALCData();
         }
 
         public DataTable GetISOData()
@@ -200,8 +201,35 @@ namespace ISOFixCheck
 
                 if (e.KeyChar == 13)
                 {
+                    label2.Text = "";
+                    label4.Text = "";
+                    label6.Text = "";
+                    pictureBox1.Image = null;
+
+                    string assyNo = "";
                     string acl = barCode.Substring(1, 5);
-                    string acc=
+                    BLL.T_Workbay t_Workbay = new BLL.T_Workbay();
+                    label2.Text = t_Workbay.GetProductNo(barCode);
+                    for (int i = 0; i < alcCode.Rows.Count; i++)
+                    {
+                        if (alcCode.Rows[i]["ALCCode"].ToString() == acl)
+                        {
+                            assyNo = alcCode.Rows[i]["AssyNo"].ToString();
+                            break;
+                        }
+                    }
+                    foreach (DataRow item in isoData.AsEnumerable())
+                    {
+                        if (item["总成号"].ToString() == assyNo)
+                        {
+
+                            label4.Text = item["配置"].ToString();
+                            label6.Text = item["描述"].ToString();
+                            pictureBox1.Image = Image.FromFile(@"d:\" + item["照片"].ToString() + ".jpg");
+
+                        }
+                    }
+                    barCode = "";
                 }
 
             }
