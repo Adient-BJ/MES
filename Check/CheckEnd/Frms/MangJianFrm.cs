@@ -1,18 +1,16 @@
 ﻿using CheckEnd.Bll;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using OPCAutomation;
 using System.Windows.Forms;
-using System.Xml;
 using System.IO;
 using System.Net;
 using CheckEnd.Frms;
 using CheckEnd.Command;
+// ReSharper disable All
 
 namespace CheckEnd
 {
@@ -71,12 +69,12 @@ namespace CheckEnd
             logo.Image = Properties.Resources.logo;
             logo.Location = new Point(0, 0);
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
-            logo.Click += button2_Click;
+            logo.Click += Button2_Click;
 
             Label lb_top = new Label();
             lb_top.Width = width / 2;
             lb_top.Height = p_top.Height;
-            lb_top.Text = "北京安道拓盲检系统 V2.0";
+            lb_top.Text = "北京安道拓盲检系统 V2.01";
             lb_top.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             lb_top.Font = new Font("微软雅黑", 22, FontStyle.Regular);
             lb_top.Location = new Point(width / 2 - lb_top.Width / 2, 0);
@@ -258,8 +256,14 @@ namespace CheckEnd
                     #region 到位
                     if (tag == LineName + "." + LineName + "." + workBayTag + "_RFID_READ_DATE")
                     {
+                        this.panel2.Controls.Clear();
+                        this.flowLayoutPanel1.Controls.Clear();
+                        DicFB.Clear();
+                        DicRobot.Clear();
+
                         if (!string.IsNullOrWhiteSpace(value))
                         {
+
                             //Code = ReadOpc(OpcIn, LineName + "." + LineName + "." + workBayTag + "_RFID_READ_DATE");
                             Code = value.ToUpper();
                             this.barCode.Text = Code;
@@ -284,7 +288,7 @@ namespace CheckEnd
                                     this.carType.Text = "无数据";
                                 }
 
-                                if (!loadGunRslt(BarCode))
+                                if (!LoadGunRslt(BarCode))
                                 {
                                     MessageBox.Show("大枪扭矩值有不合格记录");
                                     BarCode = "";
@@ -542,8 +546,8 @@ namespace CheckEnd
 
         #endregion
 
-        string[] GunListRobot = new string[5] {"101","201","301","401","501" };
-        string[] GunlistFB = new string[2] { "1", "2" };
+        readonly string[] GunListRobot = new string[5] {"101","201","301","401","501" };
+        readonly string[] GunlistFB = new string[2] { "1", "2" };
         Dictionary<string, Label> DicRobot = new Dictionary<string, Label>();
         Dictionary<string, Label> DicFB = new Dictionary<string, Label>();
 
@@ -562,7 +566,12 @@ namespace CheckEnd
                 BarCode += e.KeyChar.ToString().Replace("\r", "");
                 if (e.KeyChar == 13)
                 {
-                    //BarCode = "AXABA4000000003115179P1805170037";
+                    this.panel2.Controls.Clear();
+                    this.flowLayoutPanel1.Controls.Clear();
+                    DicFB.Clear();
+                    DicRobot.Clear();
+
+                    //BarCode = "EXAAA2000000003117830P1805300517";
                     this.barCode.Text = BarCode;
                     Model.UserAnswerQuestions.BarCode = barCode.Text;
                     Bll.T_MJCarInfo carType = new Bll.T_MJCarInfo();
@@ -579,7 +588,7 @@ namespace CheckEnd
                         this.carType.Text = "无数据";
                     }
 
-                    if (!loadGunRslt(BarCode))
+                    if (!LoadGunRslt(BarCode))
                     {
                         MessageBox.Show("大枪扭矩值有不合格记录");
                         BarCode = "";
@@ -601,26 +610,31 @@ namespace CheckEnd
             }
             catch (Exception ex)
             {
-                ShowErrorMessageInfo("等待托盘到位");
+                ShowErrorMessageInfo(ex.ToString());
                 this.pass.Show();
                 this.submit.Show();
+                ProductNum = "";
+                BarCode = "";
+
             }
         }
 
-        private bool loadGunRslt(string barcodeS)
+        private bool LoadGunRslt(string barcodeS)
         {
             Dictionary<string, Label> btnBagRobot = new Dictionary<string, Label>();
-            Dictionary<string, Label> btnBagFB = new Dictionary<string, Label>();
+            Dictionary<string, Label> btnBagFb = new Dictionary<string, Label>();
             foreach (var item in GunListRobot)
             {
                 string objectName = "R" + item;
-                btnBagRobot[objectName] = new Label();
-                btnBagRobot[objectName].Text = objectName.Substring(0, 2);
-                btnBagRobot[objectName].AutoSize = false;
-                btnBagRobot[objectName].BorderStyle = BorderStyle.FixedSingle;
-                btnBagRobot[objectName].Size = new Size(Convert.ToInt32(flowLayoutPanel1.Width / 2 - 1), flowLayoutPanel1.Height / 4);
-                btnBagRobot[objectName].Margin = new Padding(0, 0, 0, 0);
-                btnBagRobot[objectName].Font = new Font("微软雅黑", 22, FontStyle.Bold);
+                btnBagRobot[objectName] = new Label
+                {
+                    Text = objectName.Substring(0, 2),
+                    AutoSize = false,
+                    BorderStyle = BorderStyle.FixedSingle,
+                    Size = new Size(Convert.ToInt32(flowLayoutPanel1.Width / 2 - 1), flowLayoutPanel1.Height / 4),
+                    Margin = new Padding(0, 0, 0, 0),
+                    Font = new Font("微软雅黑", 22, FontStyle.Bold)
+                };
                 DicRobot.Add(item, btnBagRobot[objectName]);
                 flowLayoutPanel1.Controls.Add(btnBagRobot[objectName]);
             }
@@ -628,29 +642,29 @@ namespace CheckEnd
             foreach (var item in GunlistFB)
             {
                 string objName = "FB" + item;
-                btnBagFB[objName] = new Label();
+                btnBagFb[objName] = new Label();
                 if (barcodeS.Substring(0, 1) == "A")
                 {
-                    btnBagFB[objName].Text = "FLB3-" + item;
+                    btnBagFb[objName].Text = "FLB3-" + item;
 
                 }
                 else if (barcodeS.Substring(0, 1) == "E")
                 {
-                    btnBagFB[objName].Text = "FRB3-" + item;
+                    btnBagFb[objName].Text = "FRB3-" + item;
 
                 }
 
-                btnBagFB[objName].AutoSize = false;
-                btnBagFB[objName].BorderStyle = BorderStyle.FixedSingle;
-                btnBagFB[objName].Size = new Size(Convert.ToInt32(flowLayoutPanel1.Width / 2 - 1), flowLayoutPanel1.Height / 4);
-                btnBagFB[objName].Margin = new Padding(0, 0, 0, 0);
-                btnBagFB[objName].Font = new Font("微软雅黑", 22, FontStyle.Bold);
-                DicFB.Add(item, btnBagFB[objName]);
-                flowLayoutPanel1.Controls.Add(btnBagFB[objName]);
+                btnBagFb[objName].AutoSize = false;
+                btnBagFb[objName].BorderStyle = BorderStyle.FixedSingle;
+                btnBagFb[objName].Size = new Size(Convert.ToInt32(flowLayoutPanel1.Width / 2 - 1), flowLayoutPanel1.Height / 4);
+                btnBagFb[objName].Margin = new Padding(0, 0, 0, 0);
+                btnBagFb[objName].Font = new Font("微软雅黑", 22, FontStyle.Bold);
+                DicFB.Add(item, btnBagFb[objName]);
+                flowLayoutPanel1.Controls.Add(btnBagFb[objName]);
 
             }
-            T_Robot_PFRecord robotPF = new T_Robot_PFRecord();
-            DataTable dt = robotPF.GetPFResult(BarCode);
+            T_Robot_PFRecord robotPf = new T_Robot_PFRecord();
+            DataTable dt = robotPf.GetPFResult(BarCode);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (GunListRobot.Contains(dt.Rows[i]["IsOK"].ToString()))
@@ -658,12 +672,12 @@ namespace CheckEnd
                     DicRobot[dt.Rows[i]["IsOK"].ToString()].BackColor = Color.Green;
                 }
             }
-            DataTable dtFB = robotPF.GetFBResult(barcodeS, ProductNum);
-            for (int i = 0; i < dtFB.Rows.Count; i++)
+            DataTable dtFb = robotPf.GetFBResult(barcodeS, ProductNum);
+            for (int i = 0; i < dtFb.Rows.Count; i++)
             {
-                if (GunlistFB.Contains(dtFB.Rows[i]["PFIndex"].ToString()))
+                if (GunlistFB.Contains(dtFb.Rows[i]["PFIndex"].ToString()))
                 {
-                    DicFB[dtFB.Rows[i]["PFIndex"].ToString()].BackColor = Color.Green;
+                    DicFB[dtFb.Rows[i]["PFIndex"].ToString()].BackColor = Color.Green;
                 }
             }
 
@@ -703,25 +717,25 @@ namespace CheckEnd
 
 
         #region 退出按钮
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             this.Close();
             System.Environment.Exit(0);
         }
         #endregion
 
-        int ErrorCount = 0;
+        int _errorCount = 0;
         #region 提交盲检答案
         /// <summary>
         /// 提交盲检答案，记录数据库，不正确重答
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void submit_Click(object sender, EventArgs e)
+        private void Submit_Click(object sender, EventArgs e)
         {
             try
             {
-                Bll.T_MJAnswer t_MJAnswer = new Bll.T_MJAnswer();
+                T_MJAnswer tMjAnswer = new T_MJAnswer();
                 bool b = true;
                 foreach (AnswerControl item in AnswerControlList)
                 {
@@ -739,55 +753,55 @@ namespace CheckEnd
                     {
                         Model.UserAnswerQuestions.BarCode = this.barCode.Text;
                     }
-                    int result = t_MJAnswer.SaveMJRecode(Model.UserAnswerQuestions.BarCode, 1, Bll.User.UserID, DateTime.Now);
+                    var result = tMjAnswer.SaveMJRecode(Model.UserAnswerQuestions.BarCode, 1, User.UserID, DateTime.Now);
                     if (result>0)
                     {
-                        mangjianConfirm mangjianConfirm = new mangjianConfirm(Model.UserAnswerQuestions.BarCode);
+                        var mangjianConfirm = new mangjianConfirm(Model.UserAnswerQuestions.BarCode);
                         mangjianConfirm.ShowDialog();
                         SendRelease();
                         ShowErrorMessageInfo("盲检合格，请放行");
-                        this.panel2.Controls.Clear();
-                        this.flowLayoutPanel1.Controls.Clear();
+                        panel2.Controls.Clear();
+                        flowLayoutPanel1.Controls.Clear();
                         DicFB.Clear();
                         DicRobot.Clear();
                         barCode.Text = "";
                         carModelName.Text = "";
                         carType.Text = "";
-                        this.pass.Hide();
-                        this.submit.Hide();
+                        pass.Hide();
+                        submit.Hide();
                     }
                     else
                     {
-                        string confrimCode = this.barCode.Text;
+                        string confrimCode = barCode.Text;
                         if(confrimCode == Model.UserAnswerQuestions.BarCode)
                         {
-                          int a =  t_MJAnswer.SaveMJRecode(Model.UserAnswerQuestions.BarCode, 1, Bll.User.UserID, DateTime.Now);
+                          var a =  tMjAnswer.SaveMJRecode(Model.UserAnswerQuestions.BarCode, 1, Bll.User.UserID, DateTime.Now);
                             if(a>0)
                             {
                                 SendRelease();
                                 ShowErrorMessageInfo("盲检合格，请放行");
-                                this.panel2.Controls.Clear();
-                                this.flowLayoutPanel1.Controls.Clear();
+                                panel2.Controls.Clear();
+                                flowLayoutPanel1.Controls.Clear();
                                 DicFB.Clear();
                                 DicRobot.Clear();
                                 barCode.Text = "";
                                 carModelName.Text = "";
                                 carType.Text = "";
 
-                                this.pass.Hide();
-                                this.submit.Hide();
+                                pass.Hide();
+                                submit.Hide();
                             }
                         }
                         else
                         {
-                           int a2 =  t_MJAnswer.SaveMJRecode(confrimCode, 1, Bll.User.UserID, DateTime.Now);
+                           var a2 =  tMjAnswer.SaveMJRecode(confrimCode, 1, Bll.User.UserID, DateTime.Now);
                             if(a2>0)
                             {
                                 SendRelease();
                                 ShowErrorMessageInfo("盲检合格，请放行");
-                                this.panel2.Controls.Clear();
-                                this.pass.Hide();
-                                this.submit.Hide();
+                                panel2.Controls.Clear();
+                                pass.Hide();
+                                submit.Hide();
                             }
                         }
                         
@@ -801,17 +815,17 @@ namespace CheckEnd
                 }
                 else
                 {
-                    ErrorCount++;
-                    if (ErrorCount == 3)
+                    _errorCount++;
+                    if (_errorCount == 3)
                     {
-                        ErrorCount = 0;
+                        _errorCount = 0;
                         //保存盲检结果 1：成功 2：失败
-                        t_MJAnswer.SaveMJRecode(Model.UserAnswerQuestions.BarCode, 2, Bll.User.UserID, DateTime.Now);
-                        pass_Click(null, null);
+                        tMjAnswer.SaveMJRecode(Model.UserAnswerQuestions.BarCode, 2, Bll.User.UserID, DateTime.Now);
+                        Pass_Click(null, null);
                     }
                     else
                     {
-                        ShowErrorMessageInfo("答题错误或未答" + ErrorCount + "次,请重新回答");
+                        ShowErrorMessageInfo("答题错误或未答" + _errorCount + "次,请重新回答");
                     }
                 }
             }
@@ -911,7 +925,7 @@ namespace CheckEnd
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void pass_Click(object sender, EventArgs e)
+        private void Pass_Click(object sender, EventArgs e)
         {
             try
             {

@@ -365,3 +365,4 @@ D:\Source\Repos\MES\Check\CheckEnd\obj\Debug\CheckEnd.csproj.CoreCompileInputs.c
 D:\Source\Repos\MES\Check\CheckEnd\obj\Debug\CheckEnd.csproj.CopyComplete
 D:\Source\Repos\MES\Check\CheckEnd\obj\Debug\CheckEnd.exe
 D:\Source\Repos\MES\Check\CheckEnd\obj\Debug\CheckEnd.pdb
+D:\Source\Repos\MES\Check\CheckEnd\obj\Debug\CheckEnd.csprojAssemblyReference.cache

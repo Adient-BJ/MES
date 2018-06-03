@@ -155,7 +155,7 @@
             this.exit.TabIndex = 7;
             this.exit.Text = "退出";
             this.exit.UseVisualStyleBackColor = false;
-            this.exit.Click += new System.EventHandler(this.button2_Click);
+            this.exit.Click += new System.EventHandler(this.Button2_Click);
             // 
             // panel2
             // 
@@ -185,7 +185,7 @@
             this.submit.TabIndex = 9;
             this.submit.Text = "提交";
             this.submit.UseVisualStyleBackColor = true;
-            this.submit.Click += new System.EventHandler(this.submit_Click);
+            this.submit.Click += new System.EventHandler(this.Submit_Click);
             // 
             // retry
             // 
@@ -226,7 +226,7 @@
             this.pass.TabIndex = 12;
             this.pass.Text = "强制放行";
             this.pass.UseVisualStyleBackColor = true;
-            this.pass.Click += new System.EventHandler(this.pass_Click);
+            this.pass.Click += new System.EventHandler(this.Pass_Click);
             // 
             // flowLayoutPanel1
             // 

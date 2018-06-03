@@ -17,3 +17,4 @@ D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csproj.Generat
 D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csproj.CoreCompileInputs.cache
 D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.exe
 D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.pdb
+D:\Source\Repos\MES\Picking0122\ISOFixCheck\obj\Debug\ISOFixCheck.csprojAssemblyReference.cache
