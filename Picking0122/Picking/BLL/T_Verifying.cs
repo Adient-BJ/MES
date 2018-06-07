@@ -112,6 +112,18 @@ namespace Picking.BLL
 
             sqlHelper.ExecuteNonQuery(connstr, sql);
         }
+        /// <summary>
+        /// 2018-06-07 修改  合装时间  UpdateTime
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <param name="state"></param>
+        /// <param name="dt"></param>
+        public void MarkHZOrder(string orderID, int state, DateTime dt)
+        {
+            string sql = string.Format("update T_HZOrderRecord set state = '{0}',UpdateTime='{1}' where HZOrderGID = '{2}'", state, dt, orderID);
+
+            sqlHelper.ExecuteNonQuery(connstr, sql);
+        }
 
 
 

@@ -187,7 +187,7 @@ namespace Picking.Frm
                                     }
                                     else
                                     {
-                                        t_Verifying.MarkHZOrder(HZOrderID, 2);
+                                        t_Verifying.MarkHZOrder(HZOrderID, 2, DateTime.Now);
 
                                         DataTable kuwei = t_KuWei.GetKuWeiInfo(productNo);
                                         if (kuwei.Rows.Count == 1)
