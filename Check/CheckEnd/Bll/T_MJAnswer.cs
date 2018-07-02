@@ -11,16 +11,20 @@ namespace CheckEnd.Bll
     public class T_MJAnswer
     {
         #region 数据库连接字符串获取
-        public static string connstr = ConfigurationManager.ConnectionStrings["connstr"].ConnectionString;
+        public static string Connstr = ConfigurationManager.ConnectionStrings["connstr"].ConnectionString;
         #endregion
 
         DBUtility.SqlHelper sqlHelper = new DBUtility.SqlHelper();
         Random r = new Random();
+        /// <summary>
+        /// 查询正确答案
+        /// </summary>
+        /// <returns></returns>
         public DataTable GetAnswer()
         {
 
             string sql = "select * from T_MJProblem ";
-            DataSet ds = sqlHelper.ExecuteDataSet(connstr, sql);
+            DataSet ds = sqlHelper.ExecuteDataSet(Connstr, sql);
             DataTable answer = new DataTable();
             answer.Columns.Add("MJProblemCode");
             answer.Columns.Add("Problem");
@@ -125,7 +129,7 @@ namespace CheckEnd.Bll
             string AlCCode = masterBarCode.Substring(0, 6);
 
             string sql = string.Format("select ZQAnswer from T_MJConfigAnswer  where AlCCode ='{0}' and MJProblemCode ='{1}'", AlCCode, mjProblemCode);
-            DataTable dt = sqlHelper.ExecuteDataTable(connstr, sql);
+            DataTable dt = sqlHelper.ExecuteDataTable(Connstr, sql);
 
             string ZQAnswer = dt.Rows[0][0].ToString();
             return ZQAnswer;
@@ -140,14 +144,15 @@ namespace CheckEnd.Bll
 
             DateTime createTime = DateTime.Now;
             string mJProblemErrorID = Guid.NewGuid().ToString();
-            string sql = string.Format("insert into T_MJProblemError ( MJProblemErrorID,MJProblemCode,MasterBarCode,AnswersError,UserID,CreateTime)" +
-                                                  "values('{0}','{1}','{2}','{3}','{4}','{5}')", mJProblemErrorID, mJProblemCode, masterBarCode, answersError, userID, createTime);
-            sqlHelper.ExecuteNonQuery(connstr, sql);
+            string sql =
+                "insert into T_MJProblemError ( MJProblemErrorID,MJProblemCode,MasterBarCode,AnswersError,UserID,CreateTime)" +
+                $"values('{mJProblemErrorID}','{mJProblemCode}','{masterBarCode}','{answersError}','{userID}','{createTime}')";
+            sqlHelper.ExecuteNonQuery(Connstr, sql);
         }
         public int GetQuestionsCount()
         {
             string sql = " select count(MJProblemCode) from T_MJProblem ";
-            int questionsCount = Convert.ToInt32(sqlHelper.ExecuteScalar(connstr, sql));
+            int questionsCount = Convert.ToInt32(sqlHelper.ExecuteScalar(Connstr, sql));
             return questionsCount;
         }
 
@@ -161,11 +166,10 @@ namespace CheckEnd.Bll
         /// <param name="createTime"></param>
         public int SaveMJRecode(string materBarCode, int mJFlag, string userID, DateTime createTime)
         {
-            int result;
             string MJRecordID = Guid.NewGuid().ToString();
             string sql = string.Format("insert into T_MJRecord (MJRecordID,MasterBarCode,MJFlag,UserID,CreateTime)" +
                 "values('{0}','{1}','{2}','{3}','{4}')", MJRecordID, materBarCode, mJFlag, userID, createTime);
-            result = sqlHelper.ExecuteNonQuery(connstr, sql);
+            int result = sqlHelper.ExecuteNonQuery(Connstr, sql);
             return result;
         }
 
@@ -182,7 +186,7 @@ namespace CheckEnd.Bll
 
             string sql = string.Format("insert into T_MJRecord(MJRecordID, MasterBarCode, MJFlag, UserID, CreateTime)" +
                 "values('{0}','{1}','{2}','{3}','{4}')", MJRecordID, masterBarCode, mJFlag, userID, createTime);
-            sqlHelper.ExecuteNonQuery(connstr, sql);
+            sqlHelper.ExecuteNonQuery(Connstr, sql);
 
         }
 
@@ -197,14 +201,14 @@ namespace CheckEnd.Bll
             DateTime dt = DateTime.Now;
             string userID = Bll.User.UserID;
             string sql = string.Format("insert into T_MJRemark (MJPassInfoID,MasterBarCode,MJRemark,CreateTime,UserID)", GID, masterBarCode, Remark, dt, userID);
-            sqlHelper.ExecuteNonQuery(connstr, sql);
+            sqlHelper.ExecuteNonQuery(Connstr, sql);
         }
 
 
         public string GetWorkBay(string IP)
         {
             string sql = string.Format("select WorkbayName from T_WorkbayIPConfig where IPAddress = '{0}'", IP);
-            string workBay = sqlHelper.ExecuteScalar(connstr, sql).ToString();
+            string workBay = sqlHelper.ExecuteScalar(Connstr, sql).ToString();
 
             return workBay;
         }
@@ -213,7 +217,7 @@ namespace CheckEnd.Bll
         public string GetWorkBayTag(string IP)
         {
             string sql = string.Format("select GetWorkOpcTag from T_WorkbayIPConfig where IPAddress = '{0}'", IP);
-            string workBay = sqlHelper.ExecuteScalar(connstr, sql).ToString();
+            string workBay = sqlHelper.ExecuteScalar(Connstr, sql).ToString();
 
             return workBay;
         }

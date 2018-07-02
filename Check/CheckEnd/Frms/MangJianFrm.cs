@@ -426,7 +426,6 @@ namespace CheckEnd
                     AnswerControl ac = new AnswerControl();
                     ac.QuestionNumber = item["MJProblemCode"].ToString();
                     ac.Questions = item["Problem"].ToString();
-                    #region 
                     string picPath = t_AnswerPic.GetPicPath(item["Answers"].ToString());
                     if (picPath != "")
                     {
@@ -482,12 +481,11 @@ namespace CheckEnd
                     {
                         ac.Answers4 = item["Answers4"].ToString();
                     }
-                    #endregion
 
-                    ac.Answers = item["Answers"].ToString();
-                    ac.Answers2 = item["Answers2"].ToString();
-                    ac.Answers3 = item["Answers3"].ToString();
-                    ac.Answers4 = item["Answers4"].ToString();
+                    //ac.Answers = item["Answers"].ToString();
+                    //ac.Answers2 = item["Answers2"].ToString();
+                    //ac.Answers3 = item["Answers3"].ToString();
+                    //ac.Answers4 = item["Answers4"].ToString();
                     ac.ZhengQue = item["ZhengQue"].ToString();
                     ac.SetInfo(panel2.Width, panel2.Height);
                     ac.Location = new Point(locationX, locationY);

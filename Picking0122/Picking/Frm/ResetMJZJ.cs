@@ -20,7 +20,8 @@ namespace Picking.Frm
 
         private void ResetMJZJ_Load(object sender, EventArgs e)
         {
-
+            PasswordInput pw=new PasswordInput();
+            pw.ShowDialog();
         }
 
         private void ResetMJZJ_KeyPress(object sender, KeyPressEventArgs e)

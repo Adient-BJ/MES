@@ -35,81 +35,81 @@ namespace CheckEnd
         public void SetInfo(int width, int height)
         {
 
-            this.Width = width;
-            this.Height = height / 7;
+            Width = width;
+            Height = height / 7;
 
-            this.question.Location = new Point(width / 30, 0);
-            this.question.Size = new Size(width / 3, height / 7);
-            this.question.Text = Questions;
+            question.Location = new Point(width / 30, 0);
+            question.Size = new Size(width / 3, height / 7);
+            question.Text = Questions;
 
-            this.answer.Location = new Point((question.Width + width / 6), 0);
-            this.answer.Size = new Size(width / 8, height / 7);
-            this.answer.Text = Answers;
+            answer.Location = new Point((question.Width + width / 6), 0);
+            answer.Size = new Size(width / 8, height / 7);
+            answer.Text = Answers;
 
-            this.answer2.Location = new Point((answer.Right), 0);
-            this.answer2.Size = new Size(width / 8, height / 7);
-            this.answer2.Text = Answers2;
+            answer2.Location = new Point((answer.Right), 0);
+            answer2.Size = new Size(width / 8, height / 7);
+            answer2.Text = Answers2;
 
-            this.answer3.Location = new Point((answer2.Right), 0);
-            this.answer3.Size = new Size(width / 8, height / 7);
-            this.answer3.Text = Answers3;
+            answer3.Location = new Point((answer2.Right), 0);
+            answer3.Size = new Size(width / 8, height / 7);
+            answer3.Text = Answers3;
 
-            this.answer4.Location = new Point((answer3.Right), 0);
-            this.answer4.Size = new Size(width / 8, height / 7);
-            this.answer4.Text = Answers4;
+            answer4.Location = new Point((answer3.Right), 0);
+            answer4.Size = new Size(width / 8, height / 7);
+            answer4.Text = Answers4;
 
 
-            this.panel1.Size = this.answer.Size;
-            this.panel1.Location = new Point(0, 0);
+            panel1.Size = answer.Size;
+            panel1.Location = new Point(0, 0);
             panel1.Parent = answer;
             panel1.BackColor = Color.Transparent;
 
-            this.panel2.Size = this.answer.Size;
-            this.panel2.Location = new Point(0, 0);
+            panel2.Size = answer.Size;
+            panel2.Location = new Point(0, 0);
             panel2.Parent = answer2;
             panel2.BackColor = Color.Transparent;
 
-            this.panel3.Size = this.answer.Size;
-            this.panel3.Location = new Point(0, 0);
+            panel3.Size = answer.Size;
+            panel3.Location = new Point(0, 0);
             panel3.Parent = answer3;
             panel3.BackColor = Color.Transparent;
 
-            this.panel4.Size = this.answer.Size;
-            this.panel4.Location = new Point(0, 0);
+            panel4.Size = answer.Size;
+            panel4.Location = new Point(0, 0);
             panel4.Parent = answer4;
             panel4.BackColor = Color.Transparent;
 
-            this.panel1.Hide();
-            this.panel2.Hide();
-            this.panel3.Hide();
-            this.panel4.Hide();
+            panel1.Hide();
+            panel2.Hide();
+            panel3.Hide();
+            panel4.Hide();
 
 
-            this.answer.Name = this.Answers;
-            this.answer2.Name = this.Answers2;
-            this.answer3.Name = this.Answers3;
-            this.answer4.Name = this.Answers4;
+            answer.Name = Answers;
+            answer2.Name = Answers2;
+            answer3.Name = Answers3;
+            answer4.Name = Answers4;
 
-            this.answer.BackColor = CancelColor;
-            this.answer2.BackColor = CancelColor;
-            this.answer3.BackColor = CancelColor;
-            this.answer4.BackColor = CancelColor;
+            answer.BackColor = CancelColor;
+            answer2.BackColor = CancelColor;
+            answer3.BackColor = CancelColor;
+            answer4.BackColor = CancelColor;
 
             if (pic1 != null)
             {
-                this.answer.Image = pic1;
+                answer.Image = pic1;
             }
             if (pic2 != null)
             {
-                this.answer2.Image = pic2;
+                answer2.Image = pic2;
             }
             if (pic3 != null)
             {
-                this.answer3.Image = pic3;
+                answer3.Image = pic3;
             }
             if (pic4 != null)
             {
-                this.answer4.Image = pic4;
+                answer4.Image = pic4;
             }
             //SetAnswerColor(Questions);
 
@@ -145,21 +145,20 @@ namespace CheckEnd
         {
             Panel p = sender as Panel;
             string name = p.Name;
-            if (name == "panel1")
+            switch (name)
             {
-                answer_Click(this.answer, null);
-            }
-            if (name == "panel2")
-            {
-                answer_Click(this.answer2, null);
-            }
-            if (name == "panel3")
-            {
-                answer_Click(this.answer3, null);
-            }
-            if (name == "panel4")
-            {
-                answer_Click(this.answer4, null);
+                case "panel1":
+                    answer_Click(answer, null);
+                    break;
+                case "panel2":
+                    answer_Click(answer2, null);
+                    break;
+                case "panel3":
+                    answer_Click(answer3, null);
+                    break;
+                case "panel4":
+                    answer_Click(answer4, null);
+                    break;
             }
         }
         Color ChoiceColor = Color.BlueViolet;
@@ -172,27 +171,27 @@ namespace CheckEnd
             {
                 if (thisLab.BackColor == ChoiceColor)
                 {
-                    this.answer.BackColor = CancelColor;
-                    this.answer2.BackColor = CancelColor;
-                    this.answer3.BackColor = CancelColor;
-                    this.answer4.BackColor = CancelColor;
+                    answer.BackColor = CancelColor;
+                    answer2.BackColor = CancelColor;
+                    answer3.BackColor = CancelColor;
+                    answer4.BackColor = CancelColor;
 
-                    this.answer.Controls[0].Hide();
-                    this.answer2.Controls[0].Hide();
-                    this.answer3.Controls[0].Hide();
-                    this.answer4.Controls[0].Hide();
+                    answer.Controls[0].Hide();
+                    answer2.Controls[0].Hide();
+                    answer3.Controls[0].Hide();
+                    answer4.Controls[0].Hide();
                 }
                 else
                 {
-                    this.answer.BackColor = CancelColor;
-                    this.answer2.BackColor = CancelColor;
-                    this.answer3.BackColor = CancelColor;
-                    this.answer4.BackColor = CancelColor;
+                    answer.BackColor = CancelColor;
+                    answer2.BackColor = CancelColor;
+                    answer3.BackColor = CancelColor;
+                    answer4.BackColor = CancelColor;
 
-                    this.answer.Controls[0].Hide();
-                    this.answer2.Controls[0].Hide();
-                    this.answer3.Controls[0].Hide();
-                    this.answer4.Controls[0].Hide();
+                    answer.Controls[0].Hide();
+                    answer2.Controls[0].Hide();
+                    answer3.Controls[0].Hide();
+                    answer4.Controls[0].Hide();
                     thisLab.BackColor = ChoiceColor;
                     thisLab.Controls[0].Show();
                 }
@@ -205,30 +204,30 @@ namespace CheckEnd
             get
             {
                 bool result = false;
-                if (this.answer.BackColor == ChoiceColor)
+                if (answer.BackColor == ChoiceColor)
                 {
-                    if (this.answer.Name == this.ZhengQue)
+                    if (answer.Name == ZhengQue)
                     {
                         return true;
                     }
                 }
-                if (this.answer2.BackColor == ChoiceColor)
+                if (answer2.BackColor == ChoiceColor)
                 {
-                    if (this.answer2.Name == this.ZhengQue)
+                    if (answer2.Name == ZhengQue)
                     {
                         return true;
                     }
                 }
-                if (this.answer3.BackColor == ChoiceColor)
+                if (answer3.BackColor == ChoiceColor)
                 {
-                    if (this.answer3.Name == this.ZhengQue)
+                    if (answer3.Name == ZhengQue)
                     {
                         return true;
                     }
                 }
-                if (this.answer4.BackColor == ChoiceColor)
+                if (answer4.BackColor == ChoiceColor)
                 {
-                    if (this.answer4.Name == this.ZhengQue)
+                    if (answer4.Name == ZhengQue)
                     {
                         return true;
                     }

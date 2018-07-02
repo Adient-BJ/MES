@@ -159,6 +159,12 @@
     <Compile Include="Frm\InitialKuWei.Designer.cs">
       <DependentUpon>InitialKuWei.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm\PasswordInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\PasswordInput.Designer.cs">
+      <DependentUpon>PasswordInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm\Picking.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\InitialKuWei.resx">
       <DependentUpon>InitialKuWei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\PasswordInput.resx">
+      <DependentUpon>PasswordInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\Picking.resx">
       <DependentUpon>Picking.cs</DependentUpon>

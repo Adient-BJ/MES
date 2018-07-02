@@ -10,7 +10,7 @@ namespace CheckEnd.Bll
     class T_Robot_PFRecord
     {
         #region 数据库连接字符串获取
-        public static string connstr = ConfigurationManager.ConnectionStrings["connstr"].ConnectionString;
+        public static string Connstr = ConfigurationManager.ConnectionStrings["connstr"].ConnectionString;
         #endregion
 
         DBUtility.SqlHelper sqlHelper = new DBUtility.SqlHelper();
@@ -23,7 +23,7 @@ namespace CheckEnd.Bll
         {
             DataTable dt;
             string sql = string.Format("SELECT IsOK  FROM T_Robot_PFRecord where MasterBarCode='{0}' ", barcode);
-            dt = sqlHelper.ExecuteDataTable(connstr, sql);
+            dt = sqlHelper.ExecuteDataTable(Connstr, sql);
             return dt;
         }
 
@@ -38,9 +38,10 @@ namespace CheckEnd.Bll
             {
                 lor = "FRB3";
             }
-            DataTable dt;
-            string sql = string.Format("  select PFIndex,WorkbayName from V_PF_Data where ProductionNumber='{0}' and IsOK='OK' and WorkbayName='{1}'", productNum,lor);
-            dt = sqlHelper.ExecuteDataTable(connstr, sql);
+
+            string sql =
+                $"  select PFIndex,WorkbayName from V_PF_Data where ProductionNumber='{productNum}' and IsOK='OK' and WorkbayName='{lor}'";
+            var dt = sqlHelper.ExecuteDataTable(Connstr, sql);
             return dt;
 
         }

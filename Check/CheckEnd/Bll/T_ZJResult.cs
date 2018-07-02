@@ -10,7 +10,7 @@ namespace CheckEnd.Bll
     {
 
         #region 数据库连接字符串获取
-        public static string connstr = ConfigurationManager.ConnectionStrings["connstr"].ConnectionString;
+        public static string Connstr = ConfigurationManager.ConnectionStrings["connstr"].ConnectionString;
         #endregion
 
         DBUtility.SqlHelper sqlhelper = new DBUtility.SqlHelper();
@@ -19,14 +19,14 @@ namespace CheckEnd.Bll
         /// 保存终检结果 0：成功 1：失败
         /// </summary>
         /// <param name="masterBarCode"></param>
-        /// <param name="State"></param>
-        public void SaveZJResult(string masterBarCode,int State)
+        /// <param name="state"></param>
+        public void SaveZJResult(string masterBarCode,int state)
         {
             DateTime dt = DateTime.Now;
-            string sql = string.Format(@"insert into T_ZJResultSaved (masterBarCode,State,CreateTime,UserID)
-                values ('{0}','{1}','{2}','{3}')",masterBarCode,State,dt,Bll.User.UserID);
+            string sql = $@"insert into T_ZJResultSaved (masterBarCode,State,CreateTime,UserID)
+                values ('{masterBarCode}','{state}','{dt}','{Bll.User.UserID}')";
 
-            sqlhelper.ExecuteNonQuery(connstr, sql);
+            sqlhelper.ExecuteNonQuery(Connstr, sql);
         }
 
 
