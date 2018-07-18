@@ -17,13 +17,25 @@ namespace CheckEnd.Bll
         DBUtility.SqlHelper sqlHelper = new DBUtility.SqlHelper();
         Random r = new Random();
         /// <summary>
-        /// 查询正确答案
+        /// 查询问题及答案
         /// </summary>
         /// <returns></returns>
-        public DataTable GetAnswer()
+        public DataTable GetAnswer(string barcode)
         {
 
             string sql = "select * from T_MJProblem ";
+            switch (barcode.Substring(1, 1))
+            {
+                case "X":
+                    sql += "where CarType like '%X156%'";
+
+                    break;
+                case "Z":
+                    sql += "where CarType like '%Z177%'";
+
+                    break;
+            }
+
             DataSet ds = sqlHelper.ExecuteDataSet(Connstr, sql);
             DataTable answer = new DataTable();
             answer.Columns.Add("MJProblemCode");

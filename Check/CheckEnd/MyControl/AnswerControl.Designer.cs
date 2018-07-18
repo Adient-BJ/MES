@@ -44,7 +44,7 @@
             this.question.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.question.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.question.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.question.Location = new System.Drawing.Point(32, 17);
+            this.question.Location = new System.Drawing.Point(45, 17);
             this.question.Name = "question";
             this.question.Size = new System.Drawing.Size(266, 45);
             this.question.TabIndex = 0;
@@ -108,7 +108,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(349, 65);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(70, 46);
+            this.panel1.Size = new System.Drawing.Size(70, 32);
             this.panel1.TabIndex = 8;
             this.panel1.Click += new System.EventHandler(this.panel1_Click);
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -118,7 +118,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(481, 65);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(70, 46);
+            this.panel2.Size = new System.Drawing.Size(70, 32);
             this.panel2.TabIndex = 9;
             this.panel2.Click += new System.EventHandler(this.panel1_Click);
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -128,7 +128,7 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Location = new System.Drawing.Point(592, 65);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(70, 46);
+            this.panel3.Size = new System.Drawing.Size(70, 32);
             this.panel3.TabIndex = 9;
             this.panel3.Click += new System.EventHandler(this.panel1_Click);
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -138,7 +138,7 @@
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Location = new System.Drawing.Point(712, 69);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(70, 46);
+            this.panel4.Size = new System.Drawing.Size(70, 28);
             this.panel4.TabIndex = 9;
             this.panel4.Click += new System.EventHandler(this.panel1_Click);
             this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -148,17 +148,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.answer4);
             this.Controls.Add(this.answer3);
             this.Controls.Add(this.answer2);
             this.Controls.Add(this.answer);
             this.Controls.Add(this.question);
             this.Name = "AnswerControl";
-            this.Size = new System.Drawing.Size(832, 136);
+            this.Size = new System.Drawing.Size(832, 200);
             this.ResumeLayout(false);
 
         }

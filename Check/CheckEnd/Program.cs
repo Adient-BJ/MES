@@ -71,7 +71,7 @@ namespace CheckEnd
                 mutex = new System.Threading.Mutex(true, "OnlyRun");
                 if (mutex.WaitOne(0, false))
                 { 
-                    Application.Run(new Frm_Login()); 
+                    Application.Run(new MangJianFrm()); 
                 }
                 else
                 { 

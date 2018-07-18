@@ -21,8 +21,8 @@ namespace Picking.BLL
             string sql = string.Format(@"insert into T_MJRecord (MJRecordID,MasterBarCode,MJFlag,UserID,CreateTime) 
                 values ('{0}','{1}','{2}','{3}','{4}')", Guid.NewGuid().ToString(), barCode, 1, "hezhuang", DateTime.Now);
 
-            string sql2 = string.Format(@"insert into T_ZJResultSaved (MasterBarCode,State,CreateTime,UserID)
-	         values ('{0}','{1}','{2}','{3}')", barCode, 0, DateTime.Now, "hezhuang");
+            string sql2 = $@"insert into T_ZJResultSaved (MasterBarCode,State,CreateTime,UserID)
+	         values ('{barCode}','{0}','{DateTime.Now}','{"hezhuang"}')";
 
             int a = sqlHelper.ExecuteNonQuery(connstr, sql);
 

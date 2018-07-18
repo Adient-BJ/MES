@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.IO;
+using System.Net;
 using System.Windows.Forms;
+using ISOFixCheck.BLL;
 
 namespace ISOFixCheck
 {
     public partial class ISOFixChk : Form
     {
-        string barCode = "";
-        DataTable isoData;
-        DataTable alcCode;
+        string _barCode = "";
+        DataTable _isoData;
+        DataTable _alcCode;
 
         public ISOFixChk()
         {
@@ -24,35 +26,43 @@ namespace ISOFixCheck
         {
 
             this.BackColor = Color.White;
-            int width = this.Width;
-            int height = this.Height;
-            Panel p_top = new Panel();
-            p_top.Width = width;
-            p_top.Height = height / 12;
-            p_top.Location = new Point(0, 0);
-            p_top.BackColor = Color.FromArgb(240, 244, 247);
+            int width = Width;
+            int height = Height;
+            var p_top = new Panel
+            {
+                Width = width,
+                Height = height / 12,
+                Location = new Point(0, 0),
+                BackColor = Color.FromArgb(240, 244, 247)
+            };
 
-            PictureBox logo = new PictureBox();
-            logo.Width = width / 8;
-            logo.Height = p_top.Height;
-            logo.Image = Properties.Resources.logo;
-            logo.Location = new Point(0, 0);
-            logo.SizeMode = PictureBoxSizeMode.StretchImage;
+            PictureBox logo = new PictureBox
+            {
+                Width = width / 8,
+                Height = p_top.Height,
+                Image = Properties.Resources.logo,
+                Location = new Point(0, 0),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
             logo.Click += confirm_Click;
 
-            Label lb_top = new Label();
-            lb_top.Width = width / 2;
-            lb_top.Height = p_top.Height;
-            lb_top.Text = "北京安道拓ISOFIX目视系统";
-            lb_top.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            lb_top.Font = new Font("微软雅黑", 22, FontStyle.Regular);
-            lb_top.Location = new Point(width / 2 - lb_top.Width / 2, 0);
-            lb_top.AutoSize = false;
+            var lbTop = new Label
+            {
+                Width = width / 2,
+                Height = p_top.Height,
+                Text = "北京安道拓ISOFIX目视系统 V1.0",
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                Font = new Font("微软雅黑", 22, FontStyle.Regular)
+            };
+            lbTop.Location = new Point(width / 2 - lbTop.Width / 2, 0);
+            lbTop.AutoSize = false;
 
-            Panel p_mid = new Panel();
-            p_mid.Width = width;
-            p_mid.Height = height - p_top.Height;
-            p_mid.Location = new Point(0, p_top.Height);
+            var p_mid = new Panel
+            {
+                Width = width,
+                Height = height - p_top.Height,
+                Location = new Point(0, p_top.Height)
+            };
             // p_mid.BackColor = Color.Orange;
 
             panel1.Width = width;
@@ -79,7 +89,7 @@ namespace ISOFixCheck
             for (int i = 0; i < info.Count; i ++)
             {
                 info[i].Location = new Point(0,aa);
-                info[i].Font = new Font("微软雅黑", 25F, System.Drawing.FontStyle.Bold);
+                info[i].Font = new Font("微软雅黑", 25F, FontStyle.Bold);
                 info[i].Size = new Size(panel2.Width, lblHeight);
                 info[i].AutoSize = false;
                 info[i].TextAlign = ContentAlignment.MiddleCenter;
@@ -108,35 +118,50 @@ namespace ISOFixCheck
 
 
 
-            p_top.Controls.Add(lb_top);
+            p_top.Controls.Add(lbTop);
             p_top.Controls.Add(logo);
 
-            this.Controls.Add(p_top);
-            this.Controls.Add(p_mid);
+            Controls.Add(p_top);
+            Controls.Add(p_mid);
 
 
         }
         #endregion
         private void confirm_Click(object sender, EventArgs e)
         {
-            this.Close();
-            System.Environment.Exit(0);
+            Close();
+            Environment.Exit(0);
         }
 
         private void ISOFixChk_Load(object sender, EventArgs e)
         {
             Frm_Initialize();
-            isoData = GetISOData();
-            alcCode = GetALCData();
+            //_isoData = GetIsoData();
+            //_alcCode = GetAlcData();
+            ShowPic();
+
+        }
+        WebClient webClient =new WebClient();
+        private void ShowPic()
+        {
+            ShowPic showPic=new ShowPic();
+            string picPath=  showPic.GetPicPath("EXABA4000000003121939P1806260110");
+            string localPath = Application.StartupPath + "\\answerPic\\";
+            if (!System.IO.Directory.Exists(localPath))
+            {
+                System.IO.Directory.CreateDirectory(localPath);//不存在就创建文件夹
+            }
+            webClient.DownloadFile(picPath,localPath+Path.GetFileName(picPath));
+
+            pictureBox1.Image = Image.FromFile(localPath + Path.GetFileName(picPath));
+            //throw new NotImplementedException();
         }
 
-        public DataTable GetISOData()
+        public DataTable GetIsoData()
         {
-            DataTable dtConfig = new DataTable();
+            var dtConfig = new DataTable();
 
             string excelPath = @"D:\ISOFIX_config.xlsx";
-
-            string strConn;
 
             string excelName = "Sheet1";
 
@@ -144,7 +169,7 @@ namespace ISOFixCheck
 
             // 1、HDR表示要把第一行作为数据还是作为列名，作为数据用HDR=no，作为列名用HDR=yes；
             // 2、通过IMEX=1来把混合型作为文本型读取，避免null值。
-            strConn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Extended Properties='Excel 12.0;HDR=YES;IMEX=1';";
+            var strConn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Extended Properties='Excel 12.0;HDR=YES;IMEX=1';";
 
             string strConnection = string.Format(strConn, excelPath);
             OleDbConnection conn = new OleDbConnection(strConnection);
@@ -160,21 +185,19 @@ namespace ISOFixCheck
 
         }
 
-        public DataTable GetALCData()
+        public DataTable GetAlcData()
         {
             DataTable dtConfig = new DataTable();
 
             string excelPath = @"D:\ISOFIX_config.xlsx";
 
-            string strConn;
-
-            string excelName = "ALC";
+            const string excelName = "ALC";
 
             //注意：把一个excel文件看做一个数据库，一个sheet看做一张表。语法 "SELECT * FROM [sheet1$]"，表单要使用"[]"和"$"
 
             // 1、HDR表示要把第一行作为数据还是作为列名，作为数据用HDR=no，作为列名用HDR=yes；
             // 2、通过IMEX=1来把混合型作为文本型读取，避免null值。
-            strConn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Extended Properties='Excel 12.0;HDR=YES;IMEX=1';";
+            var strConn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}';Extended Properties='Excel 12.0;HDR=YES;IMEX=1';";
 
             string strConnection = string.Format(strConn, excelPath);
             OleDbConnection conn = new OleDbConnection(strConnection);
@@ -194,7 +217,7 @@ namespace ISOFixCheck
         {
             try
             {
-                barCode += e.KeyChar.ToString().Replace("\r", "");
+                _barCode += e.KeyChar.ToString().Replace("\r", "");
 
                 if (e.KeyChar == 13)
                 {
@@ -204,29 +227,29 @@ namespace ISOFixCheck
                     pictureBox1.Image = null;
 
                     string assyNo = "";
-                    string acl = barCode.Substring(1, 5);
+                    string acl = _barCode.Substring(1, 5);
                     BLL.T_Workbay t_Workbay = new BLL.T_Workbay();
-                    label2.Text = t_Workbay.GetProductNo(barCode);
-                    for (int i = 0; i < alcCode.Rows.Count; i++)
+                    label2.Text = t_Workbay.GetProductNo(_barCode);
+                    for (int i = 0; i < _alcCode.Rows.Count; i++)
                     {
-                        if (alcCode.Rows[i]["ALCCode"].ToString() == acl)
+                        if (_alcCode.Rows[i]["ALCCode"].ToString() == acl)
                         {
-                            assyNo = alcCode.Rows[i]["AssyNo"].ToString();
+                            assyNo = _alcCode.Rows[i]["AssyNo"].ToString();
                             break;
                         }
                     }
-                    foreach (DataRow item in isoData.AsEnumerable())
+                    foreach (DataRow item in _isoData.AsEnumerable())
                     {
                         if (item["总成号"].ToString() == assyNo)
                         {
 
                             label4.Text = item["配置"].ToString();
                             label6.Text = item["描述"].ToString();
-                            pictureBox1.Image = Image.FromFile(@"d:\" + item["照片"].ToString() + ".jpg");
+                            pictureBox1.Image = Image.FromFile(@"d:\" + item["照片"] + ".jpg");
 
                         }
                     }
-                    barCode = "";
+                    _barCode = "";
                 }
 
             }
@@ -239,7 +262,7 @@ namespace ISOFixCheck
 
         private void ISOFixChk_Activated(object sender, EventArgs e)
         {
-            this.scanTitle.Focus();
+            scanTitle.Focus();
         }
     }
 }

@@ -201,7 +201,7 @@
             // mes
             // 
             this.mes.Controls.Add(this.mesInfo);
-            this.mes.Location = new System.Drawing.Point(32, 445);
+            this.mes.Location = new System.Drawing.Point(32, 600);
             this.mes.Name = "mes";
             this.mes.Size = new System.Drawing.Size(1010, 68);
             this.mes.TabIndex = 11;
@@ -245,6 +245,7 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "扭矩信息";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label5.Visible = false;
             // 
             // MangJianFrm
             // 

@@ -57,79 +57,87 @@ namespace CheckEnd
             this.BackColor = Color.White;
             int width = this.Width;
             int height = this.Height;
-            Panel p_top = new Panel();
-            p_top.Width = width;
-            p_top.Height = height / 15;
-            p_top.Location = new Point(0, 0);
-            p_top.BackColor = Color.FromArgb(240, 244, 247);
+            Panel p_top = new Panel
+            {
+                Width = width,
+                Height = height / 15,
+                Location = new Point(0, 0),
+                BackColor = Color.FromArgb(240, 244, 247)
+            };
 
-            PictureBox logo = new PictureBox();
-            logo.Width = width / 8;
-            logo.Height = p_top.Height;
-            logo.Image = Properties.Resources.logo;
-            logo.Location = new Point(0, 0);
-            logo.SizeMode = PictureBoxSizeMode.StretchImage;
+            PictureBox logo = new PictureBox
+            {
+                Width = width / 8,
+                Height = p_top.Height,
+                Image = Properties.Resources.logo,
+                Location = new Point(0, 0),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
             logo.Click += Button2_Click;
 
-            Label lb_top = new Label();
-            lb_top.Width = width / 2;
-            lb_top.Height = p_top.Height;
-            lb_top.Text = "北京安道拓盲检系统 V2.01";
-            lb_top.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            lb_top.Font = new Font("微软雅黑", 22, FontStyle.Regular);
+            Label lb_top = new Label
+            {
+                Width = width / 2,
+                Height = p_top.Height,
+                Text = "北京安道拓盲检系统 V2.02",
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                Font = new Font("微软雅黑", 22, FontStyle.Regular)
+            };
             lb_top.Location = new Point(width / 2 - lb_top.Width / 2, 0);
             lb_top.AutoSize = false;
 
-            Panel p_mid = new Panel();
-            p_mid.Width = width;
-            p_mid.Height = height - p_top.Height;
-            p_mid.Location = new Point(0, p_top.Height);
+            Panel p_mid = new Panel
+            {
+                Width = width,
+                Height = height - p_top.Height,
+                Location = new Point(0, p_top.Height)
+            };
             // p_mid.BackColor = Color.Orange;
 
-            this.panel1.Width = width;
-            this.panel1.Height = height / 8;
-            int p1w = this.panel1.Width;
-            int p1h = this.panel1.Height;
-            this.panel1.Location = new Point(0, p1h);
+            panel1.Width = width;
+            panel1.Height = height / 9;
+            int p1w = panel1.Width;
+            int p1h = panel1.Height;
+            panel1.Location = new Point(0, lb_top.Height);
 
             this.panel2.Width = Convert.ToInt32(p1w*0.8) - Convert.ToInt32(width * 0.06);
-            this.panel2.Height = (height / 2) / 5 * 4;
-            this.panel2.Location = new Point(Convert.ToInt32(width * 0.03), Convert.ToInt32(p1h * 2.5));
+            this.panel2.Height = Convert.ToInt32(height / 2) / 5 * Convert.ToInt32(5.5);
+            this.panel2.Location = new Point(Convert.ToInt32(width * 0.03), lb_top.Height + panel1.Height + 10);
             this.panel2.BorderStyle = BorderStyle.FixedSingle;
 
             this.flowLayoutPanel1.Width = width - panel2.Width - Convert.ToInt32(width * 0.06);
             this.flowLayoutPanel1.Height = panel2.Height;
-            this.flowLayoutPanel1.Location = new Point(panel2.Right+ Convert.ToInt32(width * 0.01), Convert.ToInt32(p1h * 2.5));
+            this.flowLayoutPanel1.Location = new Point(panel2.Right+ Convert.ToInt32(width * 0.01), lb_top.Height + panel1.Height + 10);
 
             this.label5.Location = new Point(panel2.Right + Convert.ToInt32(width * 0.01), Convert.ToInt32(p1h * 2.5)-label5.Height);
 
             this.mes.Size = new Size();
 
             this.label1.Width = p1w / 10;
-            this.label1.Height = Convert.ToInt32(p1h * 0.384);
+            this.label1.Height = Convert.ToInt32(p1h * 0.5);
             this.label1.Location = new Point(Convert.ToInt32(p1w * 0.01), Convert.ToInt32(p1h * 0.33));
 
             this.barCode.Width = Convert.ToInt32(p1w * 0.3);
-            this.barCode.Height = Convert.ToInt32(p1h * 0.4);
+            this.barCode.Height = Convert.ToInt32(p1h * 0.5);
             this.barCode.Location = new Point(this.label1.Right, Convert.ToInt32(p1h * 0.36));
 
 
             this.label2.Width = p1w / 17;
-            this.label2.Height = Convert.ToInt32(p1h * 0.32);
+            this.label2.Height = Convert.ToInt32(p1h * 0.5);
             this.label2.Location = new Point(this.barCode.Right + 20, Convert.ToInt32(p1h * 0.33));
 
 
             this.carModelName.Width = p1w / 6;
-            this.carModelName.Height = Convert.ToInt32(p1h * 0.32);
+            this.carModelName.Height = Convert.ToInt32(p1h * 0.5);
             this.carModelName.Location = new Point(this.label2.Right, Convert.ToInt32(p1h * 0.36));
             this.carModelName.Text = "";
 
             this.label4.Width = p1w / 15;
-            this.label4.Height = Convert.ToInt32(p1h * 0.32);
+            this.label4.Height = Convert.ToInt32(p1h * 0.5);
             this.label4.Location = new Point(this.carModelName.Right - 20, Convert.ToInt32(p1h * 0.33));
 
             this.carType.Width = p1w / 13;
-            this.carType.Height = Convert.ToInt32(p1h * 0.32);
+            this.carType.Height = Convert.ToInt32(p1h * 0.5);
             this.carType.Location = new Point(this.label4.Right, Convert.ToInt32(p1h * 0.36));
             this.carType.Text = "";
 
@@ -147,11 +155,12 @@ namespace CheckEnd
 
             this.bypass.Width = Convert.ToInt32(width * 0.158);
             this.bypass.Height = Convert.ToInt32(height * 0.05);
-            this.bypass.Location = new Point(Convert.ToInt32(width * 0.03), Convert.ToInt32(height * 0.258));
+            this.bypass.Location = new Point(Convert.ToInt32(width * 0.03), lb_top.Height+panel1.Height);
 
             this.submit.Width = Convert.ToInt32(width * 0.23);
             this.submit.Height = Convert.ToInt32(height * 0.099);
             this.submit.Location = new Point(this.submit.Right + this.Width / 13, Convert.ToInt32(height * 0.846));
+            submit.BringToFront();
 
             this.pass.Size = this.submit.Size;
             this.pass.Location = new Point(Convert.ToInt32(width * 0.15), Convert.ToInt32(height * 0.846));
@@ -415,7 +424,7 @@ namespace CheckEnd
                 GC.Collect();
 
                 Bll.T_MJAnswer bt = new Bll.T_MJAnswer();
-                DataTable dt = bt.GetAnswer();
+                DataTable dt = bt.GetAnswer(BarCode);
 
                 Bll.T_AnswerPic t_AnswerPic = new T_AnswerPic();
 
@@ -435,52 +444,52 @@ namespace CheckEnd
                         ac.pic1 = new Bitmap(localPath);
                         ac.Answers = "";
                     }
-                    else
-                    {
+                    //else
+                    //{
                         ac.Answers = item["Answers"].ToString();
-                    }
+                    //}
 
                     string picPath2 = t_AnswerPic.GetPicPath(item["Answers2"].ToString());
                     if (picPath2 != "")
                     {
                         string localPath = GlobalPath.ApplicationPath + "\\盲检图片\\" + Path.GetFileName(picPath2);
-                        DownFile(picPath, localPath);
+                        DownFile(picPath2, localPath);
                  
                         ac.pic2 = new Bitmap(localPath);
                         ac.Answers2 = "";
                     }
-                    else
-                    {
+                    //else
+                    //{
                         ac.Answers2 = item["Answers2"].ToString();
-                    }
+                    //}
 
                     string picPath3 = t_AnswerPic.GetPicPath(item["Answers3"].ToString());
                     if (picPath3 != "")
                     {
                         string localPath = GlobalPath.ApplicationPath + "\\盲检图片\\" + Path.GetFileName(picPath3);
-                        DownFile(picPath, localPath);
+                        DownFile(picPath3, localPath);
              
                         ac.pic3 = new Bitmap(localPath);
                         ac.Answers3 = "";
                     }
-                    else
-                    {
+                    //else
+                    //{
                         ac.Answers3 = item["Answers3"].ToString();
-                    }
+                    //}
 
                     string picPath4 = t_AnswerPic.GetPicPath(item["Answers4"].ToString());
                     if (picPath4 != "")
                     {
                         string localPath = GlobalPath.ApplicationPath + "\\盲检图片\\" + Path.GetFileName(picPath4);
-                        DownFile(picPath, localPath);
+                        DownFile(picPath4, localPath);
             
                         ac.pic4 = new Bitmap(localPath);
                         ac.Answers4 = "";
                     }
-                    else
-                    {
+                    //else
+                    //{
                         ac.Answers4 = item["Answers4"].ToString();
-                    }
+                    //}
 
                     //ac.Answers = item["Answers"].ToString();
                     //ac.Answers2 = item["Answers2"].ToString();
@@ -490,7 +499,7 @@ namespace CheckEnd
                     ac.SetInfo(panel2.Width, panel2.Height);
                     ac.Location = new Point(locationX, locationY);
                     panel2.Controls.Add(ac);
-                    locationY += (ac.Height + 20);
+                    locationY += (ac.Height + 10);
                     AnswerControlList.Add(ac);
                 }
             }
@@ -908,7 +917,7 @@ namespace CheckEnd
         private void ShowErrorMessageInfo(string errorText)
         {
             this.mes.Size = new Size(this.panel2.Width, this.panel2.Height / 5);
-            this.mes.Location = new Point(Convert.ToInt32(this.Width * 0.03), Convert.ToInt32(this.panel1.Height * 2.5) + this.panel2.Height);
+            this.mes.Location = new Point(Convert.ToInt32(this.Width * 0.03), Convert.ToInt32(this.panel1.Height) + this.panel2.Height + 50);
             this.mes.BorderStyle = BorderStyle.None;
 
             this.mesInfo.Size = this.mes.Size;

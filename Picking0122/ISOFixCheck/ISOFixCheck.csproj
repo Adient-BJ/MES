@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\ShowPic.cs" />
     <Compile Include="BLL\T_Workbay.cs" />
     <Compile Include="DB\ErrorLog.cs" />
     <Compile Include="DB\SqlHelper.cs" />

@@ -36,27 +36,29 @@ namespace CheckEnd
         {
 
             Width = width;
-            Height = height / 7;
+            Height = height / 6;
 
             question.Location = new Point(width / 30, 0);
-            question.Size = new Size(width / 3, height / 7);
+            question.Size = new Size(width / 3, height / 6);
             question.Text = Questions;
 
             answer.Location = new Point((question.Width + width / 6), 0);
-            answer.Size = new Size(width / 8, height / 7);
-            answer.Text = Answers;
+            answer.Size = new Size(width / 8, height / 6);
+            
 
             answer2.Location = new Point((answer.Right), 0);
-            answer2.Size = new Size(width / 8, height / 7);
-            answer2.Text = Answers2;
+            answer2.Size = new Size(width / 8, height / 6);
+          
 
             answer3.Location = new Point((answer2.Right), 0);
-            answer3.Size = new Size(width / 8, height / 7);
-            answer3.Text = Answers3;
+            answer3.Size = new Size(width / 8, height / 6);
+           
 
             answer4.Location = new Point((answer3.Right), 0);
-            answer4.Size = new Size(width / 8, height / 7);
-            answer4.Text = Answers4;
+            answer4.Size = new Size(width / 8, height / 6);
+           
+
+
 
 
             panel1.Size = answer.Size;
@@ -84,6 +86,32 @@ namespace CheckEnd
             panel3.Hide();
             panel4.Hide();
 
+            answer.Text = "";
+            answer2.Text = "";
+            answer3.Text = "";
+            answer4.Text = "";
+            if (pic1 == null)
+            {
+                answer.Text = Answers;
+            }
+            if (pic2 == null)
+            {
+                answer2.Text = Answers2;
+            }
+            if (pic3 == null)
+            {
+                answer3.Text = Answers3;
+            }
+            if (pic4 == null)
+            {
+                answer4.Text = Answers4;
+            }
+
+
+            //pictureBox1.Paint += picbox_border_Paint;
+            //pictureBox2.Paint += picbox_border_Paint;
+            //pictureBox3.Paint += picbox_border_Paint;
+            //pictureBox4.Paint += picbox_border_Paint;
 
             answer.Name = Answers;
             answer2.Name = Answers2;
@@ -97,19 +125,23 @@ namespace CheckEnd
 
             if (pic1 != null)
             {
-                answer.Image = pic1;
+                answer.Image = pic1; 
             }
+
             if (pic2 != null)
             {
-                answer2.Image = pic2;
+               answer2.Image = pic2;
+                
             }
             if (pic3 != null)
             {
                 answer3.Image = pic3;
+                
             }
             if (pic4 != null)
             {
                 answer4.Image = pic4;
+                
             }
             //SetAnswerColor(Questions);
 
@@ -134,12 +166,22 @@ namespace CheckEnd
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            ControlPaint.DrawBorder(e.Graphics, (sender as Panel).ClientRectangle,
-            Color.BlueViolet, 6, ButtonBorderStyle.Solid, //左边
-　　　　　  Color.BlueViolet, 6, ButtonBorderStyle.Solid, //上边
-　　　　　  Color.BlueViolet, 6, ButtonBorderStyle.Solid, //右边
-　　　　　  Color.BlueViolet, 6, ButtonBorderStyle.Solid);//底边
+            Control con = sender as Control;
+            ControlPaint.DrawBorder(e.Graphics, con.ClientRectangle,
+            Color.Green, 6, ButtonBorderStyle.Solid, //左边
+　　　　　   Color.Green, 6, ButtonBorderStyle.Solid, //上边
+　　　　　   Color.Green, 6, ButtonBorderStyle.Solid, //右边
+　　　　　   Color.Green, 6, ButtonBorderStyle.Solid);//底边
         }
+        //private void picbox_border_Paint(object sender, PaintEventArgs e)
+        //{
+        //    Control con = sender as Control;
+        //    ControlPaint.DrawBorder(e.Graphics, con.ClientRectangle,
+        //        Color.Green, 6, ButtonBorderStyle.Solid, //左边
+        //        Color.Green, 6, ButtonBorderStyle.Solid, //上边
+        //        Color.Green, 6, ButtonBorderStyle.Solid, //右边
+        //        Color.Green, 6, ButtonBorderStyle.Solid);//底边
+        //}
 
         private void panel1_Click(object sender, EventArgs e)
         {
@@ -167,8 +209,8 @@ namespace CheckEnd
         {
             Label thisLab = sender as Label;
             
-            if(!string.IsNullOrEmpty(thisLab.Text))
-            {
+            //if(!string.IsNullOrEmpty(thisLab.Text))
+            //{
                 if (thisLab.BackColor == ChoiceColor)
                 {
                     answer.BackColor = CancelColor;
@@ -192,10 +234,18 @@ namespace CheckEnd
                     answer2.Controls[0].Hide();
                     answer3.Controls[0].Hide();
                     answer4.Controls[0].Hide();
+
+
+                    //pictureBox1.Hide();
+                    //pictureBox2.Hide();
+                    //pictureBox3.Hide();
+                    //pictureBox4.Hide();
+
                     thisLab.BackColor = ChoiceColor;
                     thisLab.Controls[0].Show();
+                  
                 }
-            }
+            //
           
         }
 
