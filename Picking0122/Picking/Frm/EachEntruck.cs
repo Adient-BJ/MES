@@ -551,8 +551,26 @@ namespace Picking.Frm
             {
                 MessageBox.Show("单号无效");
                 productionNo = "";
+                WriteLog(ex.Message);
             }
         }
+
+        public static bool WriteLog(string strLog)
+        {
+            try
+            {
+                string logFileName = @"C:\Log.txt";
+                strLog += "\r\n\r\n";
+                if (!string.IsNullOrEmpty(strLog))
+                {
+                    System.IO.File.AppendAllText(logFileName, strLog, Encoding.Default);
+                }
+                return true;
+            }
+            catch { }
+            return false;
+        }
+
 
         public string PartStr(string part)
         {
@@ -598,6 +616,11 @@ namespace Picking.Frm
                         return "整垫";
                     case "P"://整背
                         return "整背";
+                    case "N"://40
+                        return "背40";
+                    case "M"://背60
+                        return "背60";
+
                     default:
                         return "";
                 }
@@ -625,7 +648,7 @@ namespace Picking.Frm
 
         private void EachEntruck_Activated(object sender, EventArgs e)
         {
-            this.TitleNo.Focus();
+            TitleNo.Focus();
         }
 
         #endregion

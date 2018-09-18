@@ -138,6 +138,14 @@ namespace Picking.Frm
                                 case "P"://整背
                                     DicEn[整背].ThisCode = produtionNumber;
                                     break;
+                                case "N"://背40
+                                    DicEn[背40].ThisCode = produtionNumber;
+                                    break;
+                                case "M"://背60
+                                    DicEn[背60].ThisCode = produtionNumber;
+                                    break;
+
+
                             }
 
                             ////string part2 = produtionNumber.Substring(0, 2);
